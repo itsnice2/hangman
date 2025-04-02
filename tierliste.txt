@@ -1,0 +1,12 @@
+https://www.kindernetz.de/wissen/tierlexikon/tiere-von-a-z-100.html
+
+Säugetiere
+Fledermaus,Ratte,Alpaka;Ameisenbär,Biber,Braunbär,Bär,Chinchilla,Dachs,Damwild,Delfin,Eichhörnchen,Eisbär,Elch,Elefant,Erdmännchen,Esel,Faultier,Feldhase,Hase,Fischotter,Flughund,Flusspferd,Frettchen,Fuch,Gazelle,Gepard,Giraffe,Gorilla,Gürteltier,Hausmaus,Hermelin,Hund,Husky,Hyäne,Igel,Islandpferd,Kamel,Känguru,Kaninchen,Katze,Robbe,Koala,Kuh,Lama,Leopard,Löwe,Luchs,Marder,Maushamster,Meerschweinchen,Murmeltier,Nasenbär,Nashorn,Orang-Utan,Panda,Pangolin,Pavian,Pferd,Präriehund,Ratte,Rentier,Rind,Rothirsch,Schaf,Schakal,Schimpanse,Schneeleopard,Schwein,Seehund,Seelöwe,Siebenschläfer,Springbock,Stachelschwein,Steinbock,Stinktier,Tapir,Tiger,Totenkopfäffchen,Wal,Warzenschwein,Waschbär,Wildkatze,Wildschwein,Wisent,Wolf,Wüstenrennmaus,Zebra,Ziege,Ziesel,Zwergotter
+Vögel
+Ara,Auerhahn,Buntspecht,Ente,Falke,Flamingo,Gans,Gänsegeier,Geier,Graupapagei,Graureiher,Haubentaucher,Höckerschwan,Huhn,Kakadu,Kanarienvogel,Kea,Kiebitz,Kondor,Kormoran,Kranich,Mönchsgeier,Pelikan,Pfau,Pinguin,Purpurreiher,Rabe,Rebhun,Rotmilan,Krähe,Schleiereule,Schnee-Eule,Schnepfe,Seeadler,Singschwan,Sperling,Wellensittich,Steinadler,Storch,Strauss,Taube,Uhu,Waldrapp,Wasseramsel,Wüstenbussard,Zwergdommel
+Reptilien
+Boa,Brillenkaiman,Chamäleon,Echse,Eierschlange,Gecko,Königsnatter,Königspython,Kornnatter,Kragenechse,Kreuzotter,Krokodil,Krustenechse,Leguan,Meeresschildkröte,Nilwaran,Python,Ringelnatter,Schlange,Schildkröte,Waran
+Amphibien
+Axolotl,Frosch,Feuersalamander,Pfeilgiftfrosch,Teichmolch,Tomatenfrosch,
+Fische
+Aal,Bambushai,Barsch,Clownfisch,Goldfisch,Hai,Ballon-Igelfisch,Koi,Karpfen,Koi-Karpfen,Mandarinfisch,Netzmuräne,Piranha,Rochen,Rotflossen-Antennen-Wels,Wels,Schlammspringer,Schützenfisch,Seehase,Seepferdchen,Stichling,Süsswasser-Stechrochen,Zitteraal

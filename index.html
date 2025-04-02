@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman</title>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Hangman</h1>
+    </div>
+
+    <div class="spielfeld">
+        <div class="bild" id="bild"><img src="bilder/00.png" class="bild-innen"></div>
+        <div class="wort" id="wort">_ _ _ _ _</div>
+    </div>
+
+    <div class="eingabe">
+        <div class="buchstabenreihe">
+            <a href="#" id="A" class="buchstabe-button" onclick="buchstabe_pruefen('A')">A</a>
+            <a href="#" id="B" class="buchstabe-button" onclick="buchstabe_pruefen('B')">B</a>
+            <a href="#" id="C" class="buchstabe-button" onclick="buchstabe_pruefen('C')">C</a>
+            <a href="#" id="D" class="buchstabe-button" onclick="buchstabe_pruefen('D')">D</a>
+            <a href="#" id="E" class="buchstabe-button" onclick="buchstabe_pruefen('E')">E</a>
+            <a href="#" id="F" class="buchstabe-button" onclick="buchstabe_pruefen('F')">F</a>
+            <a href="#" id="G" class="buchstabe-button" onclick="buchstabe_pruefen('G')">G</a>
+            <a href="#" id="H" class="buchstabe-button" onclick="buchstabe_pruefen('H')">H</a>
+            <a href="#" id="I" class="buchstabe-button" onclick="buchstabe_pruefen('I')">I</a>
+        </div>        
+        <div class="buchstabenreihe">                        
+            <a href="#" id="J" class="buchstabe-button" onclick="buchstabe_pruefen('J')">J</a>
+            <a href="#" id="K" class="buchstabe-button" onclick="buchstabe_pruefen('K')">K</a>
+            <a href="#" id="L" class="buchstabe-button" onclick="buchstabe_pruefen('L')">L</a>
+            <a href="#" id="M" class="buchstabe-button" onclick="buchstabe_pruefen('M')">M</a>
+            <a href="#" id="N" class="buchstabe-button" onclick="buchstabe_pruefen('N')">N</a>
+            <a href="#" id="O" class="buchstabe-button" onclick="buchstabe_pruefen('O')">O</a>
+            <a href="#" id="P" class="buchstabe-button" onclick="buchstabe_pruefen('P')">P</a>
+            <a href="#" id="Q" class="buchstabe-button" onclick="buchstabe_pruefen('Q')">Q</a>
+            <a href="#" id="R" class="buchstabe-button" onclick="buchstabe_pruefen('R')">R</a>
+        </div>
+        <div class="buchstabenreihe">            
+            <a href="#" id="S" class="buchstabe-button" onclick="buchstabe_pruefen('S')">S</a>
+            <a href="#" id="T" class="buchstabe-button" onclick="buchstabe_pruefen('T')">T</a>
+            <a href="#" id="U" class="buchstabe-button" onclick="buchstabe_pruefen('U')">U</a>
+            <a href="#" id="V" class="buchstabe-button" onclick="buchstabe_pruefen('V')">V</a>
+            <a href="#" id="W" class="buchstabe-button" onclick="buchstabe_pruefen('W')">W</a>
+            <a href="#" id="X" class="buchstabe-button" onclick="buchstabe_pruefen('X')">X</a>
+            <a href="#" id="Y" class="buchstabe-button" onclick="buchstabe_pruefen('Y')">Y</a>
+            <a href="#" id="Z" class="buchstabe-button" onclick="buchstabe_pruefen('Z')">Z</a>
+        </div>
+        <br>
+        <br>
+        <button id="check" class="anderer-button">Bilder-Test</button><button id="reload" class="anderer-button">Seite neu laden</button><br>
+        <button id="gewonnen" class="anderer-button">Gewonnen</button><button id="verloren" class="anderer-button">Verloren</button>
+    </div>
+
+    <style>
+        body{
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .spielfeld{
+            border: solid 1px lightgrey;
+            border-radius: 15px;
+            width: 400px;
+            height: 230px;
+            position: relative;
+            left: calc(50% - 200px);
+        }
+
+        .bild-innen{
+            height: 150px;
+            border: solid 1px lightgrey;
+            border-radius: 7px;
+            margin-top: 10px;
+        }
+
+        .wort{
+            /* border: solid 1px lightgrey; */
+            border-radius: 7px;
+            margin-top: 10px;
+            padding: 10px 20px;
+            width: 200px;
+            /*position: relative;
+            left: calc(50% - 130px);*/
+            font-size: 24pt;
+        }
+
+        #eingabe{
+            width: 50px;
+            height: 30px;
+            text-align: center;
+        }
+
+        .eingabe{
+            width: 400px;
+            position: relative;
+            left: calc(50% - 200px);
+        }
+
+        .buchstabenreihe{
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .buchstabe-button, .anderer-button{
+            padding: 5px 10px;
+            margin: 3px 3px;
+        }        
+
+        a{
+            border: solid 1px lightgrey;
+            border-radius: 7px;
+            background-color: white;
+            width: 15px !important;
+            height: 20px !important;
+            text-decoration: none;
+            color: black;
+        }
+
+        a:hover{
+            background-color: rgb(218, 255, 218);
+        }
+
+        .buchstabe{
+            margin: 0 5px;
+        }
+
+        button:hover{
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+
+        // Variable zum Zählen der Bilder
+        var check = 0;
+        // Variable für die Prüfung ob der Buchstabe vorkommt, oder nicht: 0 = nein ; 1 = ja
+        var pruefung = 0;
+        // Variable für das zu suchende Wort: Das zu suchende Wort wird über die Funktion wortauswahl() ausgesucht
+        //var gesuchtes_wort = wortauswahl();
+                //Variable zum Testen:
+                //var gesuchtes_wort = "ABCDEFGHIJKLMNOPQRSTUVWXYZÖÄÜ";
+                var gesuchtes_wort = "HAUS";
+        // _ erstellen
+        wortfeld_erstellen();
+
+        document.getElementById("check").addEventListener("click", function(){
+            check++;
+            var zahl = check;
+
+            if(check < 10){
+                zahl = "0" + check.toString();
+            }            
+
+            if(check < 14){
+                document.getElementById("bild").innerHTML = "<img src=\"bilder/" + zahl.toString() + ".png\" class=\"bild-innen\">";
+            }
+           
+
+        })
+
+        document.getElementById("gewonnen").addEventListener("click", function(){
+            document.getElementById("bild").innerHTML = "<img src=\"bilder/gewonnen.png\" class=\"bild-innen\">";
+        })
+
+        document.getElementById("verloren").addEventListener("click", function(){
+            document.getElementById("bild").innerHTML = "<img src=\"bilder/verloren.png\" class=\"bild-innen\">";
+        })
+
+        // Seite neu laden / Spiel neu starte
+        document.getElementById("reload").addEventListener("click", function(){
+            window.location.href = "index.html";
+
+        })
+
+        // Prüfung ob der Buchstabe im Wort vorkommt
+        function buchstabe_pruefen(buchstabe){
+            for(i = 0; i < gesuchtes_wort.length; i++){
+                if(buchstabe == gesuchtes_wort.charAt(i)){
+                    document.getElementById(i).innerHTML = buchstabe;
+                    document.getElementById(buchstabe).style.backgroundColor = "lightgrey";
+                    pruefung = 1;
+                }
+            }
+
+            // Buchstaben grau markieren, damit man weiß, dass er schon ausgewählt wurde
+            document.getElementById(buchstabe).style.backgroundColor = "lightgrey";
+
+            var sieg = 0;
+            for(i = 0; i < gesuchtes_wort.length; i++){
+                if(document.getElementById(i).innerHTML == "_"){
+                    sieg++;
+                }
+            }
+
+            // Wenn der Buchstabe nicht vorkam, dann das nächste Bild wählen
+            if(pruefung == 0){
+                check++;
+                var zahl = check;
+
+                if(check < 10){
+                    zahl = "0" + check.toString();
+                }            
+
+                if(check < 14){
+                    document.getElementById("bild").innerHTML = "<img src=\"bilder/" + zahl + ".png\" class=\"bild-innen\">";
+                }
+                else{
+                    document.getElementById("bild").innerHTML = "<img src=\"bilder/verloren.png\" class=\"bild-innen\">";
+                }
+                
+            }
+
+            pruefung = 0;
+
+            // TODO: Muss noch richtig funktionieren!
+            if(sieg == 0){
+                document.getElementById("bild").innerHTML = "<img src=\"bilder/gewonnen.png\" class=\"bild-innen\">";
+            }
+        }
+
+        // Funktion um die passende Anzahl an _ zu erstellen
+        function wortfeld_erstellen(){
+            document.getElementById("wort").innerHTML = "";
+            for(i = 0; i < gesuchtes_wort.length; i++){
+                document.getElementById("wort").innerHTML += "<label class=\"buchstabe\" id=\"" + i + "\">_<label>";
+            }
+        }
+
+        // Funktion mit den Worten: Gibt ein zufälliges Wort aus
+        function wortauswahl(){
+            wort = ["FLEDERMAUS","RATTE","ALPAKA","AMEISENBÄR","BIBER","BRAUNBÄR","BÄR","CHINCHILLA","DACHS","DAMWILD",
+                    "DELFIN","EICHHÖRNCHEN","EISBÄR","ELCH","ELEFANT","ERDMÄNNCHEN","ESEL","FAULTIER","FELDHASE","HASE",
+                    "FISCHOTTER","FLUGHUND","FLUSSPFERD","FRETTCHEN","FUCH","GAZELLE","GEPARD","GIRAFFE","GORILLA",
+                    "GÜRTELTIER","HAUSMAUS","HERMELIN","HUND","HUSKY","HYÄNE","IGEL","ISLANDPFERD","KAMEL","KÄNGURU",
+                    "KANINCHEN","KATZE","ROBBE","KOALA","KUH","LAMA","LEOPARD","LÖWE","LUCHS","MARDER","MAUSHAMSTER",
+                    "MEERSCHWEINCHEN","MURMELTIER","NASENBÄR","NASHORN","PANDA","PANGOLIN","PAVIAN","PFERD",
+                    "PRÄRIEHUND","RATTE","RENTIER","RIND","ROTHIRSCH","SCHAF","SCHAKAL","SCHIMPANSE","SCHNEELEOPARD",
+                    "SCHWEIN","SEEHUND","SEELÖWE","SIEBENSCHLÄFER","SPRINGBOCK","STACHELSCHWEIN","STEINBOCK","STINKTIER",
+                    "TAPIR","TIGER","TOTENKOPFÄFFCHEN","WAL","WARZENSCHWEIN","WASCHBÄR","WILDKATZE","WILDSCHWEIN","WISENT",
+                    "WOLF","WÜSTENRENNMAUS","ZEBRA","ZIEGE","ZIESEL","ZWERGOTTER","ARA","AUERHAHN","BUNTSPECHT","ENTE",
+                    "FALKE","FLAMINGO","GANS","GÄNSEGEIER","GEIER","GRAUPAPAGEI","GRAUREIHER","HAUBENTAUCHER","HÖCKERSCHWAN",
+                    "HUHN","KAKADU","KANARIENVOGEL","KEA","KIEBITZ","KONDOR","KORMORAN","KRANICH","MÖNCHSGEIER","PELIKAN",
+                    "PFAU","PINGUIN","PURPURREIHER","RABE","REBHUN","ROTMILAN","KRÄHE","SCHLEIEREULE","SCHNEPFE",
+                    "SEEADLER","SINGSCHWAN","SPERLING","WELLENSITTICH","STEINADLER","STORCH","STRAUSS","TAUBE","UHU","WALDRAPP",
+                    "WASSERAMSEL","WÜSTENBUSSARD","ZWERGDOMMEL","BOA","BRILLENKAIMAN","CHAMÄLEON","ECHSE","EIERSCHLANGE","GECKO",
+                    "KÖNIGSNATTER","KÖNIGSPYTHON","KORNNATTER","KRAGENECHSE","KREUZOTTER","KROKODIL","KRUSTENECHSE","LEGUAN",
+                    "MEERESSCHILDKRÖTE","NILWARAN","PYTHON","RINGELNATTER","SCHLANGE","SCHILDKRÖTE","WARAN","AXOLOTL","FROSCH",
+                    "FEUERSALAMANDER","PFEILGIFTFROSCH","TEICHMOLCH","TOMATENFROSCH","AAL","BAMBUSHAI","BARSCH","CLOWNFISCH",
+                    "GOLDFISCH","HAI","KOI","KARPFEN","MANDARINFISCH","NETZMURÄNE","PIRANHA",
+                    "ROCHEN","WELS","SCHLAMMSPRINGER","SCHÜTZENFISCH","SEEHASE","SEEPFERDCHEN","STICHLING",
+                    "ZITTERAAL"]
+
+            return wort[ Math.floor( Math.random() * wort.length) ];
+        }
+    </script>
+    
+</body>
+</html>
